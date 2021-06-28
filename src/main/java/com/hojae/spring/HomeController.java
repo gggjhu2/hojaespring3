@@ -2,6 +2,7 @@ package com.hojae.spring;
 
 import java.text.DateFormat;
 import java.util.Date;
+import java.util.List;
 import java.util.Locale;
 
 import org.slf4j.Logger;
@@ -10,6 +11,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+
+import com.hojae.spring.board.model.vo.Board;
 
 /**
  * Handles requests for the application home page.
@@ -62,10 +65,19 @@ public class HomeController {
 	}
 
 	@RequestMapping("/ho/jae.do")
-	public String hoeJae() {
+	public String hojae() {
 		logger.info("/ho/jae.do요청!!!!!!");
 		return "ho/jae";
+	}
+		@RequestMapping("/mybatis/mybatis.do")
+		public String myhatis() {
+			logger.info("/mybatis/mybatis.do요청!!!");
+			return "mybatis/mybatis";
 				
 	}
-}
+	
+					
+		}
+
+
 

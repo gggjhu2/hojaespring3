@@ -149,6 +149,17 @@
 			<version>0.2.7</version>
 		</dependency>
 		
+		<!-- 
+			#5. lombok
+			1. ide에 lombok.jar 설치 =>자르 를 받아서로컬에서직접 설치
+			2. project에서 의존추가  =>pom 에 의존추가
+		 -->
+		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<version>1.18.20</version>
+			<scope>provided</scope>
+		</dependency>	
 	
 	
 	</dependencies>

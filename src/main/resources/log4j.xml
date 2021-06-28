@@ -68,7 +68,7 @@
 	
 	<!-- loggin message 수집용 -->
 	<!-- Application Loggers -->
-	<logger name="com.kh.spring">
+	<logger name="com.hojae.spring">
 		<level value="debug" />
 	</logger>
 	

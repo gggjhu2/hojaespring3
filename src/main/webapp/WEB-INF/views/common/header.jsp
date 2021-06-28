@@ -52,13 +52,36 @@
                             <a class="dropdown-item" href="${pageContext.request.contextPath}/kkk/kkk.do">kkk</a>
                             <a class="dropdown-item" href="${pageContext.request.contextPath}/hello/world.do">hello</a>
                             <a class="dropdown-item" href="${pageContext.request.contextPath}/ho/jae.do">ho</a>
+                            <a class="dropdown-item" href="${pageContext.request.contextPath}/board/selectBoardList.do" id="btn-board-lis">게시판조회o</a>
                         </div>
 				    </li>
+                    <li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/mybatis/mybatis.do">마이바티스</a></li>
 			    </ul>
 			    <button class="btn btn-outline-success my-2 my-sm-0" type="button" >로그인</button>
                 &nbsp;
                 <button class="btn btn-outline-success my-2 my-sm-0" type="button">회원가입</button>
 			 </div>
 		</nav>
+		
+		<script>
+		$(() => {
+
+	$("#btn-board-list").click(() => {
+		$.ajax({
+			url: "${pageContext.request.contextPath}/board/selectBoardList.do",
+			//method: "GET",
+			//dataType: "text",
+			success(data){
+				console.log(data);
+			},
+			error(xhr, statusText, err){
+				console.log(xhr, statusText, err);
+			}
+		});
+		
+	});
+		
+});
+		</script>
 	</header>
 	<section id="content">
