@@ -1,6 +1,7 @@
 package com.hojae.spring.board.model.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.stereotype.Repository;
 import org.springframework.ui.Model;
@@ -19,6 +20,9 @@ public interface BoardDao {
 	int insertBoard(Board board);
 
 	int updateBoard(Board board);
+
+	int deleteBoard(Board board);
+
 
 
 }

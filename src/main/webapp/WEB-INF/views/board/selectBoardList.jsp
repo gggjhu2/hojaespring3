@@ -4,60 +4,112 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <jsp:include page="/WEB-INF/views/common/header.jsp">
-	<jsp:param value="Dev 목록" name="title"/>
+	<jsp:param value="게시판" name="title"/>
 </jsp:include>
-<table class="table w-75 mx-auto">
-    <tr>
-      <th scope="col">번호</th>
-      <th scope="col">이름</th>
-      <th scope="col">경력</th>
-      <th scope="col">이메일</th>
-      <th scope="col">성별</th>
-      <th scope="col">개발가능언어</th>
-      <th scope="col">수정 | 삭제</th>
-	</tr>
-	<c:forEach items="${list}" var="dev">
-	<tr>
-		<td scope="row">${dev.no}</td>
-		<td>${dev.name}</td>
-		<td>${dev.career}년</td>
-		<td>${dev.email}</td>
-		<td>${dev.gender}</td>
-		<td>
-			<c:forEach items="${dev.lang}" var="lang" varStatus="vs">
-			${lang}${vs.last ? "" : ","}
-			</c:forEach>
-		</td>
-		<td>
-			<button class="btn btn-outline-secondary" onclick="updateDev(this);" data-no="${dev.no}">수정</button>
-			<button class="btn btn-outline-danger" onclick="deleteDev(this)" data-no="${dev.no}">삭제</button>
-		</td>
-	</tr>
-	</c:forEach>
-</table>
-<form
-	name="devDelFrm" 
-	action="${pageContext.request.contextPath}/demo/deleteDev.do" 
-	method="POST">
-	<input type="hidden" name="no" value="" />
-</form>
-<script>
-function updateDev(btn){
-	//GET /demo/updateDev.do?no=123 ---> devUpdateForm.jsp
-	//POST /demo/updateDev.do ---> redirect:/demo/devList.do
-	var no = $(btn).data("no");
-	//console.log(btn, no);
-	location.href = `${pageContext.request.contextPath}/demo/updateDev.do?no=\${no}`;
+
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+<style>
+/*글쓰기버튼*/
+input#btn-add{float:right; margin: 0 0 15px;}
+tr[data-no]{
+	cursor: pointer;
 }
-function deleteDev(btn){
-	//POST /demo/deleteDev.do ---> redirect:/demo/devList.do
-	var no = $(btn).data("no");
-	if(confirm(no + "번 개발자 정보를 정말 삭제하시겠습니까?")){
-		var $frm = $(document.devDelFrm);
-		$frm.find("[name=no]").val(no);
-		$frm.submit();
-	}
+</style>
+<script>
+function goBoardForm(){
+	location.href = "${pageContext.request.contextPath}/board/boardForm.do";
 }
 
+$(() => {
+	$("tr[data-no]").click(e => {
+		//화살표함수안에서는 this는 e.target이 아니다.
+		//console.log(e.target); // td태그클릭 -> 부모tr로 이벤트전파(bubbling)
+		var $tr = $(e.target).parent();
+		var no = $tr.data("no");
+		location.href = "${pageContext.request.contextPath}/board/boardDetail.do?no=" + no;
+	});
+
+	$( "#searchTitle" ).autocomplete({
+  		source: function(request, response){
+ 		  //console.log(request);
+ 		  //console.log(response);
+ 		  //response([{label:'a', value:'a'}, {label:'b', value:'b'}]);
+ 		  
+ 		  //사용자입력값전달 ajax요청 -> success함수안에서 response호출 
+  	 	  $.ajax({
+			url: "${pageContext.request.contextPath}/board/searchTitle.do",
+			data: {
+				searchTitle: request.term
+			},
+			success(data){
+				console.log(data);
+				const {list} = data;
+				//배열
+				const arr = 
+					list.map(({no, title}) => ({
+						label: title,
+						value: title,
+						no		
+					}));
+				console.log(arr);
+				response(arr);
+			},
+			error(xhr, statusText, err){
+				console.log(xhr, statusText, err);
+			}
+  	  	  });
+		},
+		select: function(event, selected){
+			// 클릭했을때, 해당게시글 상세페이지로 이동
+			//console.log("select : ", selected);
+			const {item: {no}} = selected;
+			location.href = "${pageContext.request.contextPath}/board/boardDetail.do?no=" + no;
+		},
+		focus: function(event, focused){
+		 return false;
+		},
+		autoFocus: true, 
+		minLength: 2
+  });
+});
 </script>
+<section id="board-container" class="container">
+	<input type="search" placeholder="제목 검색..." id="searchTitle" class="form-control col-sm-3 d-inline" autofocus/>
+	<input type="button" value="글쓰기" id="btn-add" class="btn btn-outline-success" onclick="goBoardForm();"/>
+	<table id="tbl-board" class="table table-striped table-hover">
+		<tr>
+			<th>번호</th>
+			<th>제목</th>
+			<th>작성자</th>
+			<th>작성일</th>
+			<th>첨부파일</th> <!-- 첨부파일 있을 경우, /resources/images/file.png 표시 width: 16px-->
+			<th>조회수</th>
+		</tr>
+		<c:forEach items="${list}" var="board">
+		<tr data-no="${board.no}">
+			<td>${board.no}</td>
+			<td>${board.title}</td>
+			<td>${board.memberId}</td>
+			<td><fmt:formatDate value="${board.regDate}" pattern="yy-MM-dd"/></td>
+			<td>
+
+			<!-- 
+				<c:if test="${Board.Board}">
+				<img src="${pageContext.request.contextPath}/resources/images/file.png" width="16px" alt="" />
+				</c:if>
+			 -->
+			
+			</td>
+			<td>${board.readCount}</td>
+		</tr>
+		</c:forEach>
+		
+	</table>
+	
+	
+	
+</section> 
+
 <jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>

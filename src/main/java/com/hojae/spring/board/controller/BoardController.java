@@ -1,13 +1,11 @@
 package com.hojae.spring.board.controller;
 
-import java.io.IOException;
 
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -20,18 +18,21 @@ import lombok.extern.slf4j.Slf4j;
 @Controller
 @Slf4j
 public class BoardController {
+
+	
 	@Autowired
 	private BoardService boardService;
 
 	@RequestMapping("/board/selectBoardList.do")
-	public String board() {
+	public String board(Model model) {
+		
 		log.info("board/selectBoardList.do!!호출!");
-
+		List<Board> list = boardService.selectBoardList();
+		
+		model.addAttribute("list", list);
 		return "board/selectBoardList";
 	}
 
-	@Autowired
-	private BoardService selectOne;
 
 	@RequestMapping("/board/selectOne.do")
 	public void selectOne(@RequestParam int no) {
@@ -69,19 +70,60 @@ public class BoardController {
 		log.info("update 이후 result = {}", result);
 		return "redirect:/board/selectOne.do?no=" + board.getNo();
 	}
-	
-	
-	
-	
-	
-	
-	
 	//업데이트보드
 	
 	
 	
 
 	
-	//딜리트는
+	
+	
+	@RequestMapping("/board/deleteBoard.do")
+	public String deleteBoard(Board board, RedirectAttributes redirectAttr) {
+		log.info("board = {}", board);
+		
+		
+		int result = boardService.deleteBoard(board);
+		
+		
+		log.info("=======================");
+		log.info("update 이후 board = {}", board);
+		log.info("update 이후 result = {}", result);
+		return "redirect:/board/selectOne.do?no=" + board.getNo();
+	}
+	//딜리트완성
+	
+//	@GetMapping("/selectBoardList.do")
+//	public String boardList(
+//				@RequestParam(required = true, defaultValue = "1") int cpage,
+//				HttpServletRequest request,
+//				Model model
+//			) {
+//		try {
+//			log.debug("cpage = {}", cpage);
+//			final int limit = 10;
+//			final int offset = (cpage - 1) * limit;
+//			Map<String, Object> param = new HashMap<>();
+//			param.put("limit", limit);
+//			param.put("offset", offset);
+//			//1.업무로직 : content영역 - Rowbounds
+//			List list = (List) boardService.selectBoardList(param);
+//			
+//			String url = request.getRequestURI();
+//			
+//			//2. jsp에 위임
+//			model.addAttribute("list", list);
+//		} catch(Exception e) {
+//			log.error("게시글 조회 오류!", e);
+//			throw e;
+//		}
+//		return "board/selectBoardList";
+//	}
+//	
+//	
+	
+	
+	
+	
 }
 

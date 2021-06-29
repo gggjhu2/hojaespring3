@@ -1,6 +1,7 @@
 package com.hojae.spring.board.model.service;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Service;
@@ -20,6 +21,9 @@ public interface BoardService {
 	int insertBoard(Board board);
 	
 	int updateBoard(Board board);
+
+	int deleteBoard(Board board);
+
 
 
 

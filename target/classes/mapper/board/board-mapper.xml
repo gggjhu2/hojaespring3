@@ -52,10 +52,21 @@
 			Board
 		set
 			title = #{title},
-			content= #{content},
+			content= #{content}
 		where 
 			no = #{no}
 	</update>
+	
+	<delete id="deleteBoard">
+		delete
+		  
+		from 
+			board   
+		where
+			no=#{no}
+	</delete>
+	
+	
 	
 	</mapper>
 	

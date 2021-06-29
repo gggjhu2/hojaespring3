@@ -26,7 +26,7 @@ $(() => {
 		$.ajax({
 			url: "${pageContext.request.contextPath}/board/selectOne.do",
 			data: {
-			no : 60
+			no : 50
 			},
 			//method: "GET",
 			//dataType: "text",
@@ -43,6 +43,7 @@ $(() => {
 		$.ajax({
 			url: "${pageContext.request.contextPath}/board/insertBoard.do",
 			data: {
+			
 				title: '게시글 작성 테스트',
 				content : 'abcdefghijklmnopqrstuvwxyz 1234567890 가나다라마바사',
 				memberId:'qwerty'
@@ -59,11 +60,11 @@ $(() => {
 	
 	$("#btn-update").click(() => {
 		$.ajax({
-			url: "${pageContext.request.contextPath}/board/updatBoard.do",
+			url: "${pageContext.request.contextPath}/board/updateBoard.do",
 			data: {
 				title: '바꾼후게시글 작성 테스트바꾼후',
 				content : '바꾼후abcdefghijklmnopqrstuvwxyz 1234567890 가나다라마바사',
-				no : 50  //pk꼭필요하다
+				no : 45  //pk꼭필요하다
 				//50번게시글
 			},
 			method: "POST",  // 생략불가
@@ -82,7 +83,7 @@ $(() => {
 			url: "${pageContext.request.contextPath}/board/deleteBoard.do",
 			data: {
 				
-				no : 50  //pk꼭필요하다
+				no : 67  //pk꼭필요하다
 				//50번게시글  몇번글을 지우는지 에대한 것이 필요하기에 pk값하나만넘겨주면된다.
 			},
 			method: "POST",  // 생략불가
@@ -116,6 +117,9 @@ $(() => {
 		
 		
 <button type="button" class="list-group-item list-group-item-action" id="btn-update">UPDATE업데이트</button>
+
+
+
 	<button type="button" class="list-group-item list-group-item-action" id="btn-delete" >DELETE딜리트(삭제)</button>
 </div>
 <jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>

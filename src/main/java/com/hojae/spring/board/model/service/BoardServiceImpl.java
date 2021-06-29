@@ -1,6 +1,7 @@
 package com.hojae.spring.board.model.service;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.mybatis.spring.SqlSessionTemplate;
@@ -15,14 +16,13 @@ import com.hojae.spring.board.model.vo.Board;
 @Service
 public class BoardServiceImpl implements BoardService {
 
-	
 	@Autowired
 	private BoardDao boardDao;
-	
+
 	@Override
 	public List<Board> selectBoardList() {
 
-		return null;
+		return boardDao.selectBoardList();
 	}
 
 	@Override
@@ -38,12 +38,13 @@ public class BoardServiceImpl implements BoardService {
 	@Override
 	public int updateBoard(Board board) {
 		// TODO Auto-generated method stub
-		return boardDao.insertBoard(board);
+		return boardDao.updateBoard(board);
 	}
 
-	
-	
-	
-	
-	
+	@Override
+	public int deleteBoard(Board board) {
+		// TODO Auto-generated method stub
+		return boardDao.deleteBoard(board);
+	}
+
 }
