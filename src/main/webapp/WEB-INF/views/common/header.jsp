@@ -83,5 +83,38 @@
 		
 });
 		</script>
+		<style>
+	#btn-selectOne {
+		color:red;
+	}
+.button {
+
+    width:100px;
+
+    background-color: #f8585b;
+
+    border: none;
+
+    color:#fff;
+
+    padding: 15px 0;
+
+    text-align: center;
+
+    text-decoration: none;
+
+    display: inline-block;
+
+    font-size: 15px;
+
+    margin: 4px;
+
+    cursor: pointer;
+
+}
+
+
+
+</style>
 	</header>
 	<section id="content">

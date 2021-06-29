@@ -7,8 +7,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
-@NoArgsConstructor
-@AllArgsConstructor
 public class Board {
 
 	private int no;
@@ -17,5 +15,7 @@ public class Board {
 	private String content;
 	private Date regDate;
 	private int readCount;
+	
 		
 }
+

@@ -14,5 +14,51 @@
 		
 	</select>
 	
+	<select id="selectOne" resultType="board" >
+		
+		select
+		      *
+		from
+			board
+		where	
+		     	no = #{no}
+		
+	</select>
+	
+	<insert id="insertBoard" parameterType="board">
+		insert into
+			board(
+				no,
+				title,
+				member_id,
+				content
+			)
+		values (
+			seq_board_no.nextval,
+			#{title},
+			#{memberId},
+			#{content}
+		)
+		<selectKey keyProperty="no" order="AFTER" resultType="_int">
+		select
+			seq_board_no.currval
+		from 
+			dual
+		</selectKey>
+	</insert>
+	
+	<update id="updateBoard" >
+		update
+			Board
+		set
+			title = #{title},
+			content= #{content},
+		where 
+			no = #{no}
+	</update>
+	
 	</mapper>
+	
+
+
 	
