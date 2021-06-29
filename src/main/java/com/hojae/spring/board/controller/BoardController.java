@@ -22,16 +22,31 @@ public class BoardController {
 	
 	@Autowired
 	private BoardService boardService;
-
+	
 	@RequestMapping("/board/selectBoardList.do")
 	public String board(Model model) {
 		
-		log.info("board/selectBoardList.do!!호출!");
-		List<Board> list = boardService.selectBoardList();
-		
-		model.addAttribute("list", list);
+		log.info("board/selectBoardList.do !호출성공");
+		List<Board> list= boardService.selectBoardList();
+		model.addAttribute("list",list);
 		return "board/selectBoardList";
+		
 	}
+	
+	
+	
+//	@Autowired
+//	private BoardService boardService;
+//
+//	@RequestMapping("/board/selectBoardList.do")
+//	public String board(Model model) {
+//		
+//		log.info("board/selectBoardList.do!!호출!");
+//		List<Board> list = boardService.selectBoardList();
+//		
+//		model.addAttribute("list", list);
+//		return "board/selectBoardList";
+//	}
 
 
 	@RequestMapping("/board/selectOne.do")
@@ -119,8 +134,6 @@ public class BoardController {
 //		}
 //		return "board/selectBoardList";
 //	}
-//	
-//	
 	
 	
 	
