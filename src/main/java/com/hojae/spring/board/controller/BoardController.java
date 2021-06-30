@@ -1,10 +1,15 @@
 package com.hojae.spring.board.controller;
 
+import java.io.File;
+import java.util.ArrayList;
 import java.util.List;
+
+import javax.servlet.ServletContext;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -12,7 +17,10 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.hojae.spring.board.model.service.BoardService;
+import com.hojae.spring.board.model.vo.Attachment;
 import com.hojae.spring.board.model.vo.Board;
+import com.hojae.spring.board.model.vo.BoardExt;
+import com.hojae.spring.common.util.HelloSpringUtils;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -20,6 +28,9 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class BoardController {
 
+	@Autowired
+	private ServletContext application;
+	
 	@Autowired
 	private BoardService boardService;
 
@@ -80,23 +91,67 @@ public class BoardController {
 		
 
 	@PostMapping("/board/insertBoard.do")
-	public String insertBoard(Board board, @RequestParam(name="upFile") MultipartFile[] upFiles,  RedirectAttributes redirectAttr) {
+	public String insertBoard(
+			@ModelAttribute BoardExt board,
+			@RequestParam(name = "upFile") MultipartFile[] upFiles,
+			RedirectAttributes redirectAttr)  throws Exception
+	{
 		log.info("board = {}", board);
 		
 		// 0. 업로드한 파일 처리
 		for(MultipartFile f : upFiles) {
 			if(!f.isEmpty()) {
-				log.debug("f = {}", f);
-			}
+				log.debug("f = {}", f);}
 		}
-
-		// 1. db에 insert
-		int result = boardService.insertBoard(board);
-		// 2. 새로 발급된 pk 출력
-		log.info("=======================");
-		log.info("insert 이후 board = {}", board);
-		log.info("insert 이후 result = {}", result);
-		return "redirect:/board/selectOne.do?no=" + board.getNo();
+			
+			
+		try {
+				log.debug("board = {}", board);
+				//1. 파일 저장 : 절대경로 /resources/upload/board
+				//pageContext:PageContext - request:HttpServletRequest - session:HttpSession - application:ServletContext
+				String saveDirectory = application.getRealPath("/resources/upload/board");
+				log.debug("saveDirectory = {}", saveDirectory);
+				
+				//디렉토리 생성
+				File dir = new File(saveDirectory);
+				if(!dir.exists())
+					dir.mkdirs(); // 복수개의 디렉토리를 생성
+				
+				List<Attachment> attachList = new ArrayList<>();
+				
+				for(MultipartFile upFile : upFiles) {
+					//input[name=upFile]로부터 비어있는 upFile이 넘어온다.
+					if(upFile.isEmpty()) continue;
+					
+					String renamedFilename = 
+							HelloSpringUtils.getRenamedFilename(upFile.getOriginalFilename());
+					
+					//a.서버컴퓨터에 저장
+					File dest = new File(saveDirectory, renamedFilename);
+					upFile.transferTo(dest); // 파일이동
+					
+					//b.저장된 데이터를 Attachment객체에 저장 및 list에 추가
+					Attachment attach = new Attachment();
+					attach.setOriginalFilename(upFile.getOriginalFilename());
+					attach.setRenamedFilename(renamedFilename);
+					attachList.add(attach);
+				}
+				
+				log.debug("attachList = {}", attachList);
+				//board객체에 설정
+				board.setAttachList(attachList);
+				
+				//2. 업무로직 : db저장 board, attachment
+				int result = boardService.insertBoard(board);
+				
+				//3. 사용자피드백 &  리다이렉트
+				redirectAttr.addFlashAttribute("msg", "게시글등록 성공!");
+			} catch(Exception e) {
+				log.error("게시글 등록 오류!", e);
+				throw e;
+			}
+		
+		return "redirect:/board/selectBoardList.do?no=" ;
 	}
 	// 인서트 보드
 	
