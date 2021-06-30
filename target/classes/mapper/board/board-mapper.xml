@@ -66,7 +66,27 @@
 			no=#{no}
 	</delete>
 	
-	
+	<insert id="boardEnroll" parameterType="board">
+		insert into
+			board(
+				no,
+				title,
+				member_id,
+				content
+			)
+		values (
+			seq_board_no.nextval,
+			#{title},
+			#{memberId},
+			#{content}
+		)
+		<selectKey keyProperty="no" order="AFTER" resultType="_int">
+		select
+			seq_board_no.currval
+		from 
+			dual
+		</selectKey>
+	</insert>
 	
 	</mapper>
 	

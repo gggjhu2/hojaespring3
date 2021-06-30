@@ -23,6 +23,8 @@ public interface BoardDao {
 
 	int deleteBoard(Board board);
 
+	int boardEnroll(Board board);
+
 
 
 }

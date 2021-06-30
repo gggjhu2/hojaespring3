@@ -17,7 +17,6 @@ public class Attachment {
 	private String renamedFilename;
 	private Date uploadDate;
 	private int downloadCount;
-	private boolean status; 	// status ------ 'Y', 'N'
 	
 	
 }

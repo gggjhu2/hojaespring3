@@ -42,4 +42,10 @@ public class BoardDaoImpl implements BoardDao {
 		return session.delete("board.deleteBoard", board);
 	}
 
+	@Override
+	public int boardEnroll(Board board) {
+		// TODO Auto-generated method stub
+		return session.insert("board.boardEnroll", board);
+	}
+
 }

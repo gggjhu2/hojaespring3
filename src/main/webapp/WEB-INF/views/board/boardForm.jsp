@@ -64,9 +64,10 @@ $(() => {
 </script>
 <div id="board-container">
 	<form name="boardFrm"
-		action="${pageContext.request.contextPath}/board/updateBoard.do"
-		method="post"
+		action="${pageContext.request.contextPath}/board/insertBoard.do"
+		method="post" enctype="multipart/form-data"
 		onsubmit="return boardValidate();">
+
 		<input type="text" class="form-control" placeholder="제목" name="title"
 			id="title" required> <input type="text" class="form-control"
 			name="memberId" value=qwerty readonly required>

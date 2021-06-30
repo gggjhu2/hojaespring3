@@ -47,4 +47,10 @@ public class BoardServiceImpl implements BoardService {
 		return boardDao.deleteBoard(board);
 	}
 
+	@Override
+	public int boardEnroll(Board board) {
+		// TODO Auto-generated method stub
+		return boardDao.boardEnroll(board);
+	}
+
 }

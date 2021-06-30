@@ -1,63 +1,80 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <jsp:include page="/WEB-INF/views/common/header.jsp">
-	<jsp:param value="Dev 목록" name="title"/>
+	<jsp:param value="게시판 상세보기" name="title" />
 </jsp:include>
-<table class="table w-75 mx-auto">
-    <tr>
-      <th scope="col">번호</th>
-      <th scope="col">이름</th>
-      <th scope="col">경력</th>
-      <th scope="col">이메일</th>
-      <th scope="col">성별</th>
-      <th scope="col">개발가능언어</th>
-      <th scope="col">수정 | 삭제</th>
-	</tr>
-	<c:forEach items="${list}" var="dev">
-	<tr>
-		<td scope="row">${dev.no}</td>
-		<td>${dev.name}</td>
-		<td>${dev.career}년</td>
-		<td>${dev.email}</td>
-		<td>${dev.gender}</td>
-		<td>
-			<c:forEach items="${dev.lang}" var="lang" varStatus="vs">
-			${lang}${vs.last ? "" : ","}
-			</c:forEach>
-		</td>
-		<td>
-			<button class="btn btn-outline-secondary" onclick="updateDev(this);" data-no="${dev.no}">수정</button>
-			<button class="btn btn-outline-danger" onclick="deleteDev(this)" data-no="${dev.no}">삭제</button>
-		</td>
-	</tr>
-	</c:forEach>
-</table>
-<form
-	name="devDelFrm" 
-	action="${pageContext.request.contextPath}/demo/deleteDev.do" 
-	method="POST">
-	<input type="hidden" name="no" value="" />
-</form>
-<script>
-function updateDev(btn){
-	//GET /demo/updateDev.do?no=123 ---> devUpdateForm.jsp
-	//POST /demo/updateDev.do ---> redirect:/demo/devList.do
-	var no = $(btn).data("no");
-	//console.log(btn, no);
-	location.href = `${pageContext.request.contextPath}/demo/updateDev.do?no=\${no}`;
-}
-function deleteDev(btn){
-	//POST /demo/deleteDev.do ---> redirect:/demo/devList.do
-	var no = $(btn).data("no");
-	if(confirm(no + "번 개발자 정보를 정말 삭제하시겠습니까?")){
-		var $frm = $(document.devDelFrm);
-		$frm.find("[name=no]").val(no);
-		$frm.submit();
-	}
+<style>
+div#board-container {
+	width: 400px;
 }
 
+input, button, textarea {
+	margin-bottom: 15px;
+}
+
+
+/* 부트스트랩 : 파일라벨명 정렬*/
+div#board-container label.custom-file-label {
+	text-align: left;
+}
+div.foot{
+margin-left: 400px;
+margin-top:0px;
+padding-top:0px;}
+</style>
+
+<script>
+function boardValidate(){
+	var $content = $("[name=content]");
+	if(/^(.|\n)+$/.test($content.val()) == false){
+		alert("내용을 입력하세요");
+		return false;
+	}
+	return true;
+}
+
+
+
+	
 </script>
+
+
+<div id="board-container" class="mx-auto text-center">
+<form name="board"
+action="${pageContext.request.contextPath}/board/updateBoard.do"
+		method="post"
+		onsubmit="return boardValidate();">
+	<input type="text" class="form-control" placeholder="글번호" name="no"
+		id="no" readonly value="${board.no}" required>
+	
+	<input
+		type="text" class="form-control" placeholder="제목" name="title"
+		id="title" value="${board.title}" required>
+	
+	<input type="text"
+		class="form-control" name="memberId" value="${board.memberId}"
+		readonly required>
+	
+	<textarea class="form-control" name="content" placeholder="내용" required>${board.content}</textarea>
+	
+	<input type="number" class="form-control" name="readCount" title="조회수"
+		value="${board.readCount}" readonly>
+	
+	<input
+		type="datetime-local" class="form-control"  readonly
+		value='<fmt:formatDate value="${board.regDate}" pattern="yyyy-MM-dd'T'HH:mm" />'>
+	
+	<input type="submit" class="foot-btn"	value="수정">
+       <button  	value="${board.no}"
+			    	class="btn btn-outline-success my-2 my-sm-0" id="btn-delete"
+			    	onclick="location.href='${pageContext.request.contextPath}/board/deleteBoard.do?no=${board.no}';" 
+			    	
+			    	type="button" >삭제</button>
+	</form>
+			</div>
+	
+
 <jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>

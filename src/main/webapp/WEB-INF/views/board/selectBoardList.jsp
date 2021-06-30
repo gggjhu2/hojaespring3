@@ -28,7 +28,7 @@ $(() => {
 		//console.log(e.target); // td태그클릭 -> 부모tr로 이벤트전파(bubbling)
 		var $tr = $(e.target).parent();
 		var no = $tr.data("no");
-		location.href = "${pageContext.request.contextPath}/board/boardDetail.do?no=" + no;
+		location.href = "${pageContext.request.contextPath}/board/selectOne.do?no=" + no;
 	});
 
 	$( "#searchTitle" ).autocomplete({
@@ -65,7 +65,7 @@ $(() => {
 			// 클릭했을때, 해당게시글 상세페이지로 이동
 			//console.log("select : ", selected);
 			const {item: {no}} = selected;
-			location.href = "${pageContext.request.contextPath}/board/boardDetail.do?no=" + no;
+			location.href = "${pageContext.request.contextPath}/board/selectOne.do?no=" + no;
 		},
 		focus: function(event, focused){
 		 return false;
