@@ -144,6 +144,7 @@ public class BoardController {
 				//2. 업무로직 : db저장 board, attachment
 				int result = boardService.insertBoard(board);
 				
+				
 				//3. 사용자피드백 &  리다이렉트
 				redirectAttr.addFlashAttribute("msg", "게시글등록 성공!");
 			} catch(Exception e) {

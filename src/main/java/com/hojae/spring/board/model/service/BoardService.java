@@ -7,18 +7,25 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Service;
 
 import com.hojae.spring.board.model.dao.BoardDao;
+import com.hojae.spring.board.model.vo.Attachment;
 import com.hojae.spring.board.model.vo.Board;
+import com.hojae.spring.board.model.vo.BoardExt;
 
 
 
 @Service
 public interface BoardService {
-
+	
+	
+	
 	List<Board> selectBoardList();
+	
+	int insertBoard(BoardExt board);
+	
+	int insertAttachment(Attachment attach);
 
 	Board selectOne(int no);
 
-	int insertBoard(Board board);
 	
 	int updateBoard(Board board);
 
@@ -26,7 +33,7 @@ public interface BoardService {
 
 	int boardEnroll(Board board);
 
-
+	
 
 
 	

@@ -7,6 +7,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.hojae.spring.board.model.vo.Attachment;
 import com.hojae.spring.board.model.vo.Board;
 
 
@@ -24,6 +25,8 @@ public interface BoardDao {
 	int deleteBoard(Board board);
 
 	int boardEnroll(Board board);
+
+	int insertAttachment(Attachment attach);
 
 
 

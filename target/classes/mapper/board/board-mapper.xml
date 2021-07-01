@@ -88,6 +88,22 @@
 		</selectKey>
 	</insert>
 	
+	<insert id="insertAttachment">
+		insert into
+			attachment(
+				no,
+				board_no,
+				original_filename,
+				renamed_filename
+			)
+		values(
+			seq_attachment_no.nextval,
+			#{boardNo},
+			#{originalFilename},
+			#{renamedFilename}
+		)
+	</insert>
+	
 	</mapper>
 	
 

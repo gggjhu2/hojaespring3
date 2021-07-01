@@ -43,22 +43,6 @@ $(() => {
 		$label.html(file ? file.name : "파일을 선택하세요.");
 		
 	});
-	
-	$(() => {
-	$("[name=upFile]").change(e => {
-		//파일명 가져오기
-		var file = $(e.target).prop('files')[0];
-		console.log(file);
-		var $label  = $(e.target).next();
-		
-		//label 적용
-		$label.html(file ? file.name : "파일을 선택하세요.");
-		
-	});
-	
-	
-	
-	
 });
 
 </script>
