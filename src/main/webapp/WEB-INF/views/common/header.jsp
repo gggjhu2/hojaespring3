@@ -20,18 +20,29 @@
 
 <!-- 사용자작성 css -->
 <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/style.css" />
+<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/TITLE.css" />
 
 </head>
 <body>
 <div id="container">
-	<header>
-		<div id="header-container">
-			<h2>Hello Spring</h2>
+
+
+<div class="section">
+ 	<H1>
+  <div class="section__group">
+    <button class="rbutton ui-button" type="button">
+      <span class="ha-transition ha-transition-pseudo text-flat text-flat_v11">
+        <span class="text-flat__label">SPRING</span>
+      </span>
+    </button>
+  </div>
+ 	</H1>
+ 
 		</div>
 		<!-- https://getbootstrap.com/docs/4.0/components/navbar/ -->
 		<nav class="navbar navbar-expand-lg navbar-light bg-light">
-			<a class="navbar-brand" href="#">
-				<img src="${pageContext.request.contextPath }/resources/images/logo-spring.png" alt="스프링로고" width="50px" />
+			<a class="navbar-brand" href="">
+				<img src="${pageContext.request.contextPath }/resources/images/logo-spring.png" alt="스프링로고"a hraf="${pageContext.request.contextPath}" width="50px" />
 			</a>
 			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
 				<span class="navbar-toggler-icon"></span>
@@ -61,6 +72,7 @@
                         </div>
 				    </li>
                     <li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/mybatis/mybatis.do">마이바티스</a></li>
+			 <input type="button" value="글쓰기" id="btn-add" class="btn btn-outline-success" onclick="goBoardForm();"/>
 			    </ul>
 			    <button class="btn btn-outline-success my-2 my-sm-0" type="button" >로그인</button>
                 &nbsp;

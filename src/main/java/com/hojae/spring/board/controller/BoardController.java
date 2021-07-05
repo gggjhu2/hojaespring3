@@ -191,23 +191,47 @@ public class BoardController {
 //
 //
 //		// 1. 파일 저장 : 
-//		
+	//	String saveDirectory =application.getRealPath("/resources/upload/board");
+//		log.debug("saveDirectory = {}", saveDirectory);
 //		// 절대경로 /resources/upload/board
 //	
+	
 //		// 반복문을 통해 첨부파일 하나씩 처리
 //		
+//		List<Attachment> attachList = new ArrayList<>();
+			
+//	for(MultipartFile upFile : upFiles) {
+//		//input[name=upFile]로부터 비어있는 upFile이 넘어온다.
+//		if(upFile.isEmpty()) continue;
+//		
+//		String renamedFilename = 
+//				HelloSpringUtils.getRenamedFilename(upFile.getOriginalFilename());
+	
+	
 //			// a.서버컴퓨터에 저장
+//			File dest = new File(saveDirectory, renamedFilename);
+	//		upFile.transferTo(dest); // 파일이동
+//	
 //	
 //			// b.저장된 데이터를 Attachment객체에 저장 및 list에 추가
-//	
+//	Attachment attach = new Attachment();
+//	attach.setOriginalFilename(upFile.getOriginalFilename());
+//	attach.setRenamedFilename(renamedFilename);
+//	attachList.add(attach);
+//	}
 //		
 //		// List<Attachment> board객체에 설정
-//
+//	ard.setAttachList(attachList);
+		
 //		// 2. 업무로직 : db저장 board, attachment
-//		
+//		int result = boardService.insertBoard(board);
 //
 //		// 3. 사용자피드백 & 리다이렉트
-//			
+//				redirectAttr.addFlashAttribute("msg", "게시글등록 성공!");
+//} catch(Exception e) {
+//	log.error("게시글 등록 오류!", e);
+//	throw e;
+//}
 //		return "redirect:/board/selectOne.do?no=" + no;
 //	}
 //
