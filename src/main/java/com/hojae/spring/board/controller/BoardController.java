@@ -283,7 +283,7 @@ public class BoardController {
 		return "redirect:/board/selectOne.do?no="+board.getNo();
 	}
 
-	@GetMapping(name="/board/fileDownload.do", produces = MediaType.APPLICATION_OCTET_STREAM_VALUE)
+	@GetMapping("/board/fileDownload.do")
 	@ResponseBody // 리턴객체를 응답메세지 body영역에 작성한다.
 	public Resource fileDownloadWithResponseEntity(@RequestParam int no, HttpServletResponse response)
 			throws UnsupportedEncodingException {
@@ -302,6 +302,5 @@ public class BoardController {
 		response.addHeader(HttpHeaders.CONTENT_DISPOSITION, "attachment;filename=" + filename);
 		return resource;
 	}
-	
 }
 
