@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.hojae.spring.board.model.vo.Attachment;
 import com.hojae.spring.board.model.vo.Board;
+import com.hojae.spring.board.model.vo.BoardExt;
 
 
 @Repository
@@ -18,16 +19,18 @@ public interface BoardDao {
 	
 	Board selectOne(int no);
 
-	int insertBoard(Board board);
-
 	int updateBoard(Board board);
 
 	int deleteBoard(Board board);
 
 	int boardEnroll(Board board);
 
+	int insertBoard(BoardExt board);
 	int insertAttachment(Attachment attach);
 
+	List<Attachment> selectAttachList(int no);
 
+	Attachment selectOneAttachment(int no);
+	
 
 }

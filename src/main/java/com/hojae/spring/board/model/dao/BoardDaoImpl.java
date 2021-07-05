@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 
 import com.hojae.spring.board.model.vo.Attachment;
 import com.hojae.spring.board.model.vo.Board;
+import com.hojae.spring.board.model.vo.BoardExt;
 
 @Repository
 public class BoardDaoImpl implements BoardDao {
@@ -25,11 +26,6 @@ public class BoardDaoImpl implements BoardDao {
 	public Board selectOne(int no) {
 		return session.selectOne("board.selectOne", no);
 
-	}
-
-	@Override
-	public int insertBoard(Board board) {
-		return session.insert("board.insertBoard", board);
 	}
 
 	@Override
@@ -50,9 +46,29 @@ public class BoardDaoImpl implements BoardDao {
 	}
 
 	@Override
+	public int insertBoard(BoardExt board) {
+		// TODO Auto-generated method stub
+		return session.insert("board.insertBoard",board);
+	}
+
+	@Override
 	public int insertAttachment(Attachment attach) {
 		// TODO Auto-generated method stub
 		return session.insert("board.insertAttachment", attach);
 	}
 
+	@Override
+	public List<Attachment> selectAttachList(int no) {
+		// TODO Auto-generated method stub
+		return session.selectList("board.selectAttachList",no);
+	}
+
+	@Override
+	public Attachment selectOneAttachment(int no) {
+		// TODO Auto-generated method stub
+		return session.selectOne("board.selectOneAttachment", no);
+	}
+	
+	
+	
 }

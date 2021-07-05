@@ -49,8 +49,9 @@ public class BoardServiceImpl implements BoardService {
 	}
 
 	@Override
-	public int insertAttachment(Attachment attach) {
-		return boardDao.insertAttachment(attach);
+	public List<Attachment> selectAttachList(int no) {
+		// TODO Auto-generated method stub
+		return boardDao.selectAttachList(no);
 	}
 
 	@Override
@@ -69,6 +70,18 @@ public class BoardServiceImpl implements BoardService {
 		}
 				//행
 		return result; 
-	}
 	
+	}
+
+	@Override
+	public int insertAttachment(Attachment attach) {
+		// TODO Auto-generated method stub
+		return boardDao.insertAttachment(attach);
+	}
+
+	@Override
+	public Attachment selectOneAttachment(int no) {
+		// TODO Auto-generated method stub
+		return boardDao.selectOneAttachment(no);
+	}
 }

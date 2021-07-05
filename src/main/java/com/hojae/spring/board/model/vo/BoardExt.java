@@ -14,4 +14,8 @@ public class BoardExt extends Board {
 	private boolean hasAttachment;
 	private List<Attachment> attachList;
 	
+	public BoardExt(Board board) {
+		super(board.getNo(), board.getTitle(), board.getMemberId(), board.getContent(), board.getRegDate(), board.getReadCount());
+	}
+	
 }

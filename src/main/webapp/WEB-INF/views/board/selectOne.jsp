@@ -35,6 +35,18 @@ function boardValidate(){
 	}
 	return true;
 }
+$(() => {
+	$("[name=upFile]").change(e => {
+		//파일명 가져오기
+		var file = $(e.target).prop('files')[0];
+		console.log(file);
+		var $label  = $(e.target).next();
+		
+		//label 적용
+		$label.html(file ? file.name : "파일을 선택하세요.");
+		
+	});
+});
 
 
 
@@ -57,6 +69,19 @@ action="${pageContext.request.contextPath}/board/updateBoard.do"
 	<input type="text"
 		class="form-control" name="memberId" value="${board.memberId}"
 		readonly required>
+	
+	
+	<c:forEach items="${attachList}" var="attach">
+	
+		<button class="btn btn-success btn-block" 
+				type="button"
+				onclick="location.href='${pageContext.request.contextPath}/board/fileDownload.do?no=${attach.no}';">${attach.originalFilename}</button>
+	</c:forEach>
+	
+	<button class="btn btn-primary btn-lg btn-block" type="button" >부트스트랩버튼 연습이다.</button>
+	
+		
+	
 	
 	<textarea class="form-control" name="content" placeholder="내용" required>${board.content}</textarea>
 	
