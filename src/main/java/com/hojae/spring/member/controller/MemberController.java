@@ -45,6 +45,7 @@ public class MemberController {
 		// 1. 업무로직
 		Member member = memberService.selectOneMember(id);
 		log.info("member = {}", member);
+		log.info("member.password = {}", member.getPassword());
 //		log.info("encryptedPassword = {}", bcryptPasswordEncoder.encode(password));
 		log.info("모델은뭐냐={}",model);
 		// 2. 로그인여부 분기처리
@@ -52,7 +53,8 @@ public class MemberController {
 		// org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder.matches(CharSequence
 		// rawPassword, String encodedPassword)
 		if (member != null && bcryptPasswordEncoder.matches(password, member.getPassword())) {
-			log.info("멤버가모냐={}",member);
+			log.info("멤버가모냐={}",member.getPassword());
+			
 			// 로그인 성공
 			// loginMember 세션속성으로 저장하려면, class에 @SessionAttributes로 등록
 			model.addAttribute("loginMember", member);
