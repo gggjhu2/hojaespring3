@@ -21,26 +21,27 @@
 <!-- 사용자작성 css -->
 <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/style.css" />
 <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/TITLE.css" />
-
 </head>
 <body>
 <div id="container">
+<header>
 
 
 <div class="section">
  	<H1>
   <div class="section__group">
-    <button class="rbutton ui-button" type="button">
+    <button class="rbutton ui-button" type="button"  href="${pageContext.request.contextPath}">
       <span class="ha-transition ha-transition-pseudo text-flat text-flat_v11">
         <span class="text-flat__label">SPRING</span>
+         <span class="text-flat__label">SPRING</span>
+          <span class="text-flat__label">SPRING</span>
       </span>
     </button>
   </div>
  	</H1>
- 
 		</div>
 		<!-- https://getbootstrap.com/docs/4.0/components/navbar/ -->
-		<nav class="navbar navbar-expand-lg navbar-light bg-light">
+		<nav class="navbar navbar-expand-lg navbar-light bg-light" id="headernav" >
 			<a class="navbar-brand" href="">
 				<img src="${pageContext.request.contextPath }/resources/images/logo-spring.png" alt="스프링로고"a hraf="${pageContext.request.contextPath}" width="50px" />
 			</a>
@@ -74,14 +75,40 @@
                     <li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/mybatis/mybatis.do">마이바티스</a></li>
 			 <input type="button" value="글쓰기" id="btn-add" class="btn btn-outline-success" onclick="goBoardForm();"/>
 			    </ul>
-			    <button class="btn btn-outline-success my-2 my-sm-0" type="button" >로그인</button>
+			    
+			      <c:if test="${loginMember == null}">
+			       <%--로그인 이전--%>
+			    <button 
+			    	class="btn btn-outline-success my-2 my-sm-0"
+			    	onclick="location.href='${pageContext.request.contextPath}/member/memberLogin.do';" 
+			    	type="button" >로그인</button>
                 &nbsp;
-                <button class="btn btn-outline-success my-2 my-sm-0" type="button">회원가입</button>
+                <button 
+                	class="btn btn-outline-success my-2 my-sm-0"
+                	onclick="location.href='${pageContext.request.contextPath}/member/memberEnroll.do';" 
+                	type="button">회원가입</button>
+			    </c:if>
+			    <c:if test="${loginMember != null}">
+			    <%--로그인 이후 --%>
+			    <span><a href="${pageContext.request.contextPath}/member/memberDetail.do">${loginMember.name}</a>님, 안녕하세요.</span>
+			    &nbsp;
+			    <button 
+			    	class="btn btn-outline-success my-2 my-sm-0"
+			    	onclick="location.href='${pageContext.request.contextPath}/member/memberLogout.do';" 
+			    	type="button" >로그아웃</button>
+			    </c:if>
 			 </div>
 		</nav>
 		
 		<script>
 		$(() => {
+		$("tr[data-no]").click(e => {
+		//화살표함수안에서는 this는 e.target이 아니다.
+		//console.log(e.target); // td태그클릭 -> 부모tr로 이벤트전파(bubbling)
+		var $tr = $(e.target).parent();
+		var no = $tr.data("no");
+		location.href = "${pageContext.request.contextPath}/board/selectOne.do?no=" + no;
+	});
 
 	$("#btn-board-list").click(() => {
 		$.ajax({
@@ -97,42 +124,13 @@
 		});
 		
 	});
-		
+
 });
-		</script>
-		<style>
-	#btn-selectOne {
-		color:red;
-	}
-.button {
 
-    width:100px;
-
-    background-color: #f8585b;
-
-    border: none;
-
-    color:#fff;
-
-    padding: 15px 0;
-
-    text-align: center;
-
-    text-decoration: none;
-
-    display: inline-block;
-
-    font-size: 15px;
-
-    margin: 4px;
-
-    cursor: pointer;
-
-}
+</script>
+	
 
 
-
-</style>
 	</header>
 	<section id="content">
 	<c:if test="${not empty msg}">

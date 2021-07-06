@@ -752,7 +752,8 @@ basic
 }
 
 .text-flat__label {
-  display: block;
+	grid:initial;
+  display: contents;
   padding: var(--text-flat-padding, 0.5rem 0.75rem);
 }
 

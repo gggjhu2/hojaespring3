@@ -3,21 +3,17 @@ body {font-family:"휴먼모음T";}
 div, section, header, aside, footer {padding:10px;}
 
 /********** 전체컨테이너 **********/
-div#container	{}
 
-div#header-container{color:fuchsia;}
 body{background-color: #c4d7f5;
 		color:#169416;
 		font-weight:bold;}
-
-.navbar-light .navbar-nav .nav-link {
+.navbar-nav .nav-link {
     color: #169416;
 }
-body{font-coloer:#169416}
 /********** header **********/
 header div#header-container {height:100px;}
 header div#header-container h2 	{margin:30px 10px 0px 10px;}
-
+header div#header-container{ background-color:#b8d4f2}	
 
 /********** content **********/
 section#content		{min-height:600px;}
@@ -26,5 +22,4 @@ section#content		{min-height:600px;}
 /********** footer **********/
 footer	{background-color:#f8f9fa; background-clip:content-box; clear:both; height:95px; text-align:center;}
 footer p 	{margin-top:30px;}
-
 

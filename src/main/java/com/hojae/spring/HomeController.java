@@ -76,5 +76,7 @@ public class HomeController {
 		return "mybatis/mybatis";
 
 	}
+	
+	
 
 }

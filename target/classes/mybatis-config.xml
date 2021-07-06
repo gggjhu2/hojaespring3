@@ -15,6 +15,6 @@
   </typeAliases>
   <typeHandlers>
   	<!-- <typeHandler handler="com.kh.spring.common.typehandler.StringArrayTypeHandler"/> -->
-  	<package name="com.kh.spring.common.typehandler"/>
+  	<package name="com.hojae.spring.common.typehandler"/>
   </typeHandlers>
 </configuration>

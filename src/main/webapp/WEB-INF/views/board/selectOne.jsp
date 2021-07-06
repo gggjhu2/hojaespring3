@@ -15,15 +15,16 @@ input, button, textarea {
 	margin-bottom: 15px;
 }
 
-
 /* 부트스트랩 : 파일라벨명 정렬*/
 div#board-container label.custom-file-label {
 	text-align: left;
 }
-div.foot{
-margin-left: 400px;
-margin-top:0px;
-padding-top:0px;}
+
+div.foot {
+	margin-left: 400px;
+	margin-top: 0px;
+	padding-top: 0px;
+}
 </style>
 
 <script>
@@ -55,51 +56,49 @@ $(() => {
 
 
 <div id="board-container" class="mx-auto text-center">
-<form name="board"
-action="${pageContext.request.contextPath}/board/updateBoard.do"
-		method="post"
-		onsubmit="return boardValidate();">
-	<input type="text" class="form-control" placeholder="글번호" name="no"
-		id="no" readonly value="${board.no}" required>
-	
-	<input
-		type="text" class="form-control" placeholder="제목" name="title"
-		id="title" value="${board.title}" required>
-	
-	<input type="text"
-		class="form-control" name="memberId" value="${board.memberId}"
-		readonly required>
-	
-	
-	<c:forEach items="${attachList}" var="attach">
-	
-		<button class="btn btn-success btn-block" 
-				type="button"
+	<form name="board"
+		action="${pageContext.request.contextPath}/board/updateBoard.do"
+		method="post" onsubmit="return boardValidate();">
+		<input type="text" class="form-control" placeholder="글번호" name="no"
+			id="no" readonly value="${board.no}" required> <input
+			type="text" class="form-control" placeholder="제목" name="title"
+			id="title" value="${board.title}" required> <input
+			type="text" class="form-control" name="memberId"
+			value="${board.memberId}" readonly required>
+
+
+		<c:forEach items="${attachList}" var="attach">
+
+			<button class="btn btn-success btn-block" type="button"
 				onclick="location.href='${pageContext.request.contextPath}/board/fileDownload.do?no=${attach.no}';">${attach.originalFilename}</button>
-	</c:forEach>
+		</c:forEach>
+
+		<button class="btn btn-primary btn-lg btn-block" type="button">부트스트랩버튼
+			연습이다.</button>
+
+
+
+
+		<textarea class="form-control" name="content" placeholder="내용"
+			required>${board.content}</textarea>
+
+		<input type="number" class="form-control" name="readCount" title="조회수"
+			value="${board.readCount}" readonly> <input
+			type="datetime-local" class="form-control" readonly
+			value='<fmt:formatDate value="${board.regDate}" pattern="yyyy-MM-dd'T'HH:mm" />'>
+
+
+		<button value="${board.no}"
+			class="btn btn-outline-success my-2 my-sm-0" id="btn-update"
+			type="submit">수정</button>
+
+		<button value="${board.no}"
+			class="btn btn-outline-success my-2 my-sm-0" id="btn-delete"
+			onclick="location.href='${pageContext.request.contextPath}/board/deleteBoard.do?no=${board.no}';"
+			type="button">삭제</button>
 	
-	<button class="btn btn-primary btn-lg btn-block" type="button" >부트스트랩버튼 연습이다.</button>
-	
-		
-	
-	
-	<textarea class="form-control" name="content" placeholder="내용" required>${board.content}</textarea>
-	
-	<input type="number" class="form-control" name="readCount" title="조회수"
-		value="${board.readCount}" readonly>
-	
-	<input
-		type="datetime-local" class="form-control"  readonly
-		value='<fmt:formatDate value="${board.regDate}" pattern="yyyy-MM-dd'T'HH:mm" />'>
-	
-	<input type="submit" class="foot-btn"	value="수정">
-       <button  	value="${board.no}"
-			    	class="btn btn-outline-success my-2 my-sm-0" id="btn-delete"
-			    	onclick="location.href='${pageContext.request.contextPath}/board/deleteBoard.do?no=${board.no}';" 
-			    	
-			    	type="button" >삭제</button>
 	</form>
-			</div>
-	
+</div>
+
 
 <jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>
