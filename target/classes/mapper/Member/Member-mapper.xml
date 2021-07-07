@@ -15,7 +15,41 @@
 	<resultMap type="member" id="memberVoMap">
 		<result column="hobby" property="hobby" typeHandler="stringArrayTypeHandler"/>
 	</resultMap>
-
+<insert id="insertMember">
+		insert into
+			member
+		values(
+			#{id},
+			#{password},
+			#{name},
+			#{gender},
+			#{birthday},
+			#{email},
+			#{phone},
+			#{address},
+			#{hobby},
+			default, 
+			default
+		)
+		<!-- enroll_date, enabled컬럼은 기본값처리 -->
+	</insert>
+	
+	<update id="updateMember">
+		update 
+			member
+		set
+			name = #{name},
+			gender = #{gender},
+			birthday = #{birthday},
+			email = #{email},
+			phone = #{phone},
+			address = #{address},
+			hobby = #{hobby}
+		where
+			id = #{id}	
+	</update>
+	
+	
 
 
 </mapper>

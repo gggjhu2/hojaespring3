@@ -35,8 +35,13 @@ $(() => {
 });
 </script>
 <section id="board-container" class="container">
-	
+  <c:if test="${loginMember == null}">
+	</c:if>
+	 <c:if test="${loginMember != null}">	
 	<input type="button" value="글쓰기" id="btn-add" class="btn btn-outline-success" onclick="goBoardForm();"/>
+	
+	</c:if>
+	
 	<table id="tbl-board" class="table table-striped table-hover">
 		<tr>
 			<th>번호</th>

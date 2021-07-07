@@ -28,22 +28,23 @@
 
 
 <div class="section">
- 	<H1>
-  <div class="section__group">
-    <button class="rbutton ui-button" type="button"  href="${pageContext.request.contextPath}">
-      <span class="ha-transition ha-transition-pseudo text-flat text-flat_v11">
-        <span class="text-flat__label">SPRING</span>
-         <span class="text-flat__label">SPRING</span>
-          <span class="text-flat__label">SPRING</span>
+  <div class="section__groupspring" onclick="location.href='${pageContext.request.contextPath}';" >
+    <button class="rbutton ui-button" type="button" >
+      <span class="ha-transition ha-transition-pseudo text-flat text-flat_v11" >
+			<h1>
+        <span class="ha-transition ha-transition-pseudo text-flat text-flat_v11">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;SPRING&nbsp;&nbsp;</span>
+        <span class="ha-transition ha-transition-pseudo text-flat text-flat_v11">SPRING</span>
+        
+      
+          <span class="ha-transition ha-transition-pseudo text-flat text-flat_v11">&nbsp;&nbsp;SPRING&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+			</h1>
       </span>
     </button>
   </div>
- 	</H1>
-		</div>
 		<!-- https://getbootstrap.com/docs/4.0/components/navbar/ -->
 		<nav class="navbar navbar-expand-lg navbar-light bg-light" id="headernav" >
-			<a class="navbar-brand" href="">
-				<img src="${pageContext.request.contextPath }/resources/images/logo-spring.png" alt="스프링로고"a hraf="${pageContext.request.contextPath}" width="50px" />
+			<a class="navbar-brand" href="${pageContext.request.contextPath}">
+				<img src="${pageContext.request.contextPath }/resources/images/logo-spring.png" alt="스프링로고" width="50px" />
 			</a>
 			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
 				<span class="navbar-toggler-icon"></span>
@@ -76,6 +77,8 @@
 			 <input type="button" value="글쓰기" id="btn-add" class="btn btn-outline-success" onclick="goBoardForm();"/>
 			    </ul>
 			    
+			    
+			    <%--이부분  로그인 분기처리시 뷰단 보이는 거 분기나누는거 잘알아놔놓자.. --%>
 			      <c:if test="${loginMember == null}">
 			       <%--로그인 이전--%>
 			    <button 

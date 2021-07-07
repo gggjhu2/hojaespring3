@@ -22,6 +22,7 @@ div#board-container label.custom-file-label {
 }
 </style>
 <script>
+
 /* textarea에도 required속성을 적용가능하지만, 공백이 입력된 경우 대비 유효성검사를 실시함. */
 function boardValidate(){
 	var $content = $("[name=content]");
@@ -33,9 +34,6 @@ function boardValidate(){
 }
 
 $(() => {
-	function goBoardForm(){
-	location.href = "${pageContext.request.contextPath}/board/boardForm.do";
-
 	$("[name=upFile]").change(e => {
 		//파일명 가져오기
 		var file = $(e.target).prop('files')[0];
@@ -49,6 +47,7 @@ $(() => {
 });
 
 </script>
+
 <div id="board-container">
 	<form name="boardFrm"
 		action="${pageContext.request.contextPath}/board/insertBoard.do"

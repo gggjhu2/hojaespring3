@@ -88,6 +88,8 @@ $(() => {
 			value='<fmt:formatDate value="${board.regDate}" pattern="yyyy-MM-dd'T'HH:mm" />'>
 
 
+	<%-- 이프문 분기나눠서 해당패이지글의 작성자가아니면 수정삭제가보이지않게만든다. --%>
+	<c:if test="${loginMember != null && loginMember.id eq board.memberId}">
 		<button value="${board.no}"
 			class="btn btn-outline-success my-2 my-sm-0" id="btn-update"
 			type="submit">수정</button>
@@ -96,6 +98,8 @@ $(() => {
 			class="btn btn-outline-success my-2 my-sm-0" id="btn-delete"
 			onclick="location.href='${pageContext.request.contextPath}/board/deleteBoard.do?no=${board.no}';"
 			type="button">삭제</button>
+	</c:if>
+
 	
 	</form>
 </div>

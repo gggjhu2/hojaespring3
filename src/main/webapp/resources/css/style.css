@@ -23,3 +23,5 @@ section#content		{min-height:600px;}
 footer	{background-color:#f8f9fa; background-clip:content-box; clear:both; height:95px; text-align:center;}
 footer p 	{margin-top:30px;}
 
+.section__groupspring {
+	cursor: pointer;}
