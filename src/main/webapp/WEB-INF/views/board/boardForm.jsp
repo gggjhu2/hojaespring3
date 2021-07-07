@@ -33,6 +33,9 @@ function boardValidate(){
 }
 
 $(() => {
+	function goBoardForm(){
+	location.href = "${pageContext.request.contextPath}/board/boardForm.do";
+
 	$("[name=upFile]").change(e => {
 		//파일명 가져오기
 		var file = $(e.target).prop('files')[0];
@@ -54,7 +57,7 @@ $(() => {
 
 		<input type="text" class="form-control" placeholder="제목" name="title"
 			id="title" required> <input type="text" class="form-control"
-			name="memberId" value=qwerty readonly required>
+			name="memberId" value="${loginMember.id}"  readonly required>
 		<!-- input:file소스 : https://getbootstrap.com/docs/4.1/components/input-group/#custom-file-input -->
 		<div class="input-group mb-3" style="padding: 0px;">
 			<div class="input-group-prepend" style="padding: 0px;">

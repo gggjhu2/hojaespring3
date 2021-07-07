@@ -101,6 +101,9 @@
 		</nav>
 		
 		<script>
+	function goBoardForm(){
+	location.href = "${pageContext.request.contextPath}/board/boardForm.do";
+};
 		$(() => {
 		$("tr[data-no]").click(e => {
 		//화살표함수안에서는 this는 e.target이 아니다.
@@ -109,6 +112,7 @@
 		var no = $tr.data("no");
 		location.href = "${pageContext.request.contextPath}/board/selectOne.do?no=" + no;
 	});
+	
 
 	$("#btn-board-list").click(() => {
 		$.ajax({
