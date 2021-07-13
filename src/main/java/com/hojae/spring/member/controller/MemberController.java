@@ -3,11 +3,16 @@ package com.hojae.spring.member.controller;
 import java.beans.PropertyEditor;
 import java.sql.Date;
 import java.text.SimpleDateFormat;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,6 +23,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
@@ -43,6 +49,8 @@ public class MemberController {
 	
 	@Autowired
 	private BCryptPasswordEncoder bcryptPasswordEncoder;
+	
+	
 	
 	
 	@GetMapping("/memberLogin.do")
@@ -114,8 +122,6 @@ public class MemberController {
 		return "redirect:/";
 	}
 	
-	
-
 	/**
 	 * java.sql.Date, java.util.Date 필드에 값대입시
 	 * 사용자 입력값이 ""인 경우, null로 처리될 수 있도록 설정
@@ -129,7 +135,7 @@ public class MemberController {
 		PropertyEditor editor = new CustomDateEditor(format, true);
 		binder.registerCustomEditor(Date.class, editor);
 	}
-	
+
 	/**
 	 * 로그인한 사용자 정보 열람하기
 	 */
@@ -142,6 +148,7 @@ public class MemberController {
 		mav.setViewName("member/memberDetail");
 		return mav;
 	}
+	
 	
 	@PostMapping("/memberUpdate.do")
 	public ModelAndView memberUpdate(
@@ -177,6 +184,8 @@ public class MemberController {
 		}
 		return mav;
 	}
+	
+	
 	
 }
 	

@@ -7,6 +7,69 @@
 	<jsp:param value="회원등록" name="title"/>
 </jsp:include>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/member.css" />
+<script>
+$("#id").keyup(e => {
+	const id = $(e.target).val();
+	const $error = $(".guide.error");
+	const $ok = $(".guide.ok");
+	const $idValid = $("#idValid"); // 0 -> 1(중복검사 성공시)
+
+	if(id.length < 4) {
+		$(".guide").hide();
+		$idValid.val(0); // 다시 작성하는 경우 대비
+		return;
+	}
+	// {id} => {id: "abcde"}
+	$.ajax({
+		url: "${pageContext.request.contextPath}/member/checkIdDuplicate3.do",
+		data: {id},
+		success: (data) => {
+			console.log(data); // {"available": true}
+			const {available} = data;
+			if(available){
+				$ok.show();
+				$error.hide();
+				$idValid.val(1);
+			}
+			else {
+				$ok.hide();
+				$error.show();
+				$idValid.val(0);
+			}
+		},
+		error: (xhr, statusText, err) => {
+			console.log(xhr, statusText, err);
+		}
+	});
+});
+	
+$("#passwordCheck").blur(function(){
+	var $password = $("#password"), $passwordCheck = $("#passwordCheck");
+	if($password.val() != $passwordCheck.val()){
+		alert("패스워드가 일치하지 않습니다.");
+		$password.select();
+	}
+});
+	
+$("[name=memberEnrollFrm]").submit(function(){
+
+	var $id = $("#id");
+	if(/^\w{4,}$/.test($id.val()) == false) {
+		alert("아이디는 최소 4자리이상이어야 합니다.");
+		$id.focus();
+		return false;
+	}
+
+	var $idValid = $("#idValid");
+	if($idValid.val() == 0){
+		alert("아이디 중복검사 해주세요.");
+		$id.focus();
+		return false;
+	}
+	
+	return true;
+});
+</script>
 
 <div id="enroll-container" class="mx-auto text-center">
 	<form 
@@ -95,68 +158,5 @@
 		<input type="reset" value="취소">
 	</form>
 </div>
-<script>
-$("#id").keyup(e => {
-	const id = $(e.target).val();
-	const $error = $(".guide.error");
-	const $ok = $(".guide.ok");
-	const $idValid = $("#idValid"); // 0 -> 1(중복검사 성공시)
-
-	if(id.length < 4) {
-		$(".guide").hide();
-		$idValid.val(0); // 다시 작성하는 경우 대비
-		return;
-	}
-	// {id} => {id: "abcde"}
-	$.ajax({
-		url: "${pageContext.request.contextPath}/member/checkIdDuplicate3.do",
-		data: {id},
-		success: (data) => {
-			console.log(data); // {"available": true}
-			const {available} = data;
-			if(available){
-				$ok.show();
-				$error.hide();
-				$idValid.val(1);
-			}
-			else {
-				$ok.hide();
-				$error.show();
-				$idValid.val(0);
-			}
-		},
-		error: (xhr, statusText, err) => {
-			console.log(xhr, statusText, err);
-		}
-	});
-});
-	
-$("#passwordCheck").blur(function(){
-	var $password = $("#password"), $passwordCheck = $("#passwordCheck");
-	if($password.val() != $passwordCheck.val()){
-		alert("패스워드가 일치하지 않습니다.");
-		$password.select();
-	}
-});
-	
-$("[name=memberEnrollFrm]").submit(function(){
-
-	var $id = $("#id");
-	if(/^\w{4,}$/.test($id.val()) == false) {
-		alert("아이디는 최소 4자리이상이어야 합니다.");
-		$id.focus();
-		return false;
-	}
-
-	var $idValid = $("#idValid");
-	if($idValid.val() == 0){
-		alert("아이디 중복검사 해주세요.");
-		$id.focus();
-		return false;
-	}
-	
-	return true;
-});
-</script>
 
 <jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>

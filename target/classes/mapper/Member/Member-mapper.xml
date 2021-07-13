@@ -15,6 +15,7 @@
 	<resultMap type="member" id="memberVoMap">
 		<result column="hobby" property="hobby" typeHandler="stringArrayTypeHandler"/>
 	</resultMap>
+	
 <insert id="insertMember">
 		insert into
 			member
