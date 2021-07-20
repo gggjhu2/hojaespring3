@@ -52,6 +52,7 @@
 			<div class="collapse navbar-collapse" id="navbarNav">
 				<ul class="navbar-nav mr-auto">
 			    	<li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}">Home</a></li>
+			    	<li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/memo/memo.do">메모</a></li>
 			    	
 			    	
                     <li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/board/selectBoardList.do">게시판</a></li>
@@ -71,6 +72,15 @@
                             <a class="dropdown-item" href="${pageContext.request.contextPath}/hello/world.do">hello</a>
                             <a class="dropdown-item" href="${pageContext.request.contextPath}/ho/jae.do">ho</a>
                             <a class="dropdown-item" href="${pageContext.request.contextPath}/board/selectBoardList.do" id="btn-board-lis">게시판조회o</a>
+                        </div>
+				    </li>
+				     <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            demo
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                               <a class="dropdown-item" href="${pageContext.request.contextPath}/demo/devForm.do">Dev 등록</a>
+                            <a class="dropdown-item" href="${pageContext.request.contextPath}/demo/devList.do">Dev 목록</a>
                         </div>
 				    </li>
                     <li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/mybatis/mybatis.do">마이바티스</a></li>

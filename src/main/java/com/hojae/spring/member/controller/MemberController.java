@@ -101,7 +101,7 @@ public class MemberController {
 	}
 
 	@PostMapping("/memberEnroll.do")
-	public String memberEnroll(Member member, RedirectAttributes redirectAttr) {
+	public String memberEnroll(@ModelAttribute Member member, RedirectAttributes redirectAttr) {
 
 		try {
 			log.info("member = {}", member);
@@ -114,7 +114,10 @@ public class MemberController {
 			//1. 업무로직
 			int result = memberService.insertMember(member);
 			//2. 사용자피드백
-			redirectAttr.addFlashAttribute("msg", "회원가입성공");
+			Model msg =redirectAttr.addFlashAttribute("msg", "게시글등록 성공!");
+			redirectAttr.addFlashAttribute("msg", "회원가입성공!!");
+			
+			log.info("msg={}",msg);
 		} catch (Exception e) {
 			log.error("회원가입 오류!", e);
 			throw e;

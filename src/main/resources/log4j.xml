@@ -69,7 +69,7 @@
 	<!-- loggin message 수집용 -->
 	<!-- Application Loggers -->
 	<logger name="com.hojae.spring">
-		<level value="debug" />
+		<level value="trace" />
 	</logger>
 	
 	<!-- 3rdparty Loggers -->

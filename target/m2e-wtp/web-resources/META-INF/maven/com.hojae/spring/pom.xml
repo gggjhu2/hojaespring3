@@ -83,7 +83,7 @@
 					<artifactId>jmxri</artifactId>
 				</exclusion>
 			</exclusions>
-			<scope>runtime</scope>
+			<scope>compile</scope>
 		</dependency>
 
 		<!-- @Inject -->
@@ -142,6 +142,14 @@
 			<artifactId>commons-dbcp</artifactId>
 			<version>1.4</version>
 		</dependency>
+		
+		<dependency>
+		    <groupId>org.springframework</groupId>
+		    <artifactId>springloaded</artifactId>
+		    <version>1.2.8.RELEASE</version>
+		    <scope>provided</scope>
+		    <!-- 기본값compile, compile시에는 사용 runtime 사용하지 않음.  -->
+		</dependency>
 
 		<!-- #10.query와 resultSet을 logging할 수 있는 log4jdbc-remix 라이브러리추가 -->
 		<!-- https://mvnrepository.com/artifact/org.lazyluke/log4jdbc-remix/0.2.7 -->
@@ -150,6 +158,8 @@
 			<artifactId>log4jdbc-remix</artifactId>
 			<version>0.2.7</version>
 		</dependency>
+		
+		
 
 		<!-- #5. lombok 1. ide에 lombok.jar 설치 =>자르 를 받아서로컬에서직접 설치 2. project에서 
 			의존추가 =>pom 에 의존추가 -->
@@ -158,6 +168,13 @@
 			<artifactId>lombok</artifactId>
 			<version>1.18.20</version>
 			<scope>provided</scope>
+		</dependency>
+		
+		<!-- #6. 커맨드객체 유효성검사 @Valid-->
+		<dependency>
+			<groupId>javax.validation</groupId>
+			<artifactId>validation-api</artifactId>
+			<version>2.0.1.Final</version>
 		</dependency>
 
 
@@ -240,6 +257,18 @@
 	        <artifactId>json-lib-ext-spring</artifactId>
 	        <version>1.0.2</version>
 	    </dependency>
+	    
+	    <!-- https://mvnrepository.com/artifact/org.springframework/springloaded -->
+<dependency>
+    <groupId>org.springframework</groupId>
+    <artifactId>springloaded</artifactId>
+    <version>1.2.8.RELEASE</version>
+    <scope>provided</scope>
+</dependency>
+	    
+
+
+
 
 	</dependencies>
 	

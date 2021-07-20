@@ -299,6 +299,7 @@ public class BoardController {
 				
 				//3. 사용자피드백 &  리다이렉트
 				redirectAttr.addFlashAttribute("msg", "게시글등록 성공!");
+				Model msg =redirectAttr.addFlashAttribute("msg", "게시글등록 성공!");
 			} catch(Exception e) {
 				log.error("게시글 등록 오류!", e);
 				throw e;
